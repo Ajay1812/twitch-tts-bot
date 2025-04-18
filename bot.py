@@ -1,16 +1,15 @@
 from twitchio.ext import commands
-from gtts import gTTS
-from pydub import AudioSegment
-from pydub.playback import play
-import io
 from dotenv import load_dotenv
 import os
+from tts_handler import enqueue_tts, start_tts_worker
 
 load_dotenv()
 
 TOKEN = os.getenv('TOKEN')
 CHANNEL = os.getenv('CHANNEL')
 BOT_USER = os.getenv('BOT_USER')
+
+start_tts_worker()  # Start the background TTS processing thread
 
 class Bot(commands.Bot):
 
@@ -30,20 +29,7 @@ class Bot(commands.Bot):
 
         text = f"{message.author.name} says: {message.content}"
         print(text)
-
-        try:
-            # Generate speech to a memory stream
-            mp3_fp = io.BytesIO()
-            tts = gTTS(text=text, lang='en')
-            tts.write_to_fp(mp3_fp)
-            mp3_fp.seek(0)
-
-            # Load and play using pydub
-            audio = AudioSegment.from_file(mp3_fp, format="mp3")
-            play(audio)
-
-        except Exception as e:
-            print("❌ TTS Error:", e)
+        enqueue_tts(text)
 
 if __name__ == "__main__":
     bot = Bot()
