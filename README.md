@@ -12,14 +12,6 @@ A real-time Twitch bot that reads out messages from your chat using **Text-to-Sp
 - ✅ In-memory audio playback (no file saving)
 - ✅ Easy setup with `.env` file
 
----
-
-## 🚀 Demo
-
-![demo](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaWcwZXQ1cXhiYjRkOW04ZGx2YnpobWtpOWh6aGR3NGo2YWhraXNmZiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/BhZMn2uU7jTuAfxmC6/giphy.gif)
-
----
-
 ## 🧰 Requirements
 
 - Python 3.9+
